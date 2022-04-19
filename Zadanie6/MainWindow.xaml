@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadanie6"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+         Title="Osoby" Height="330"  Width="750" FontSize="14" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+       
+    </Window.Resources>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Click="Dodaj">Dodaj</Button>
+            <Button Click="Usun">Usuń</Button>
+        </ToolBar>
+        <Grid Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Margin="4" Name="listboxdata" DisplayMemberPath="singleUserInListView" />
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="2" DataContext="{Binding ElementName=listboxdata, Path=SelectedItem}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Label Margin="4">Imię</Label>
+                <TextBox Name="boxName" Grid.Column="1" Margin="4" Text="{Binding Path=Imie}" />
+                <Label Grid.Row="1" Margin="4">Nazwisko</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="4" Text="{Binding Path=Nazwisko}" />
+                
+                <GroupBox Grid.Row="2"  Grid.ColumnSpan="2" Margin="3">
+                    <GroupBox.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Margin="3" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" ></CheckBox>
+                            <TextBlock >Dane szczegółowe</TextBlock>
+                        </StackPanel>
+                    </GroupBox.Header>
+                    
+                    <StackPanel>
 
-    </Grid>
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Width="auto" Margin="4">Adres e-mail </Label>
+                            <TextBox x:Name="email" Grid.Column="1" Margin="4" IsEnabled="False" Text="{Binding Path=Email}" ></TextBox>
+                            <Label Grid.Column="0" Grid.Row="1" Margin="4">Kwota wpłaty </Label>
+                            <TextBox x:Name="wplata" Grid.Row="1" Grid.Column="1" Margin="4" IsEnabled="False" Text="{Binding Path=Wplata}" />
+                            <Label Grid.Column="0" Grid.Row="2" Margin="4">Region</Label>
+                            
+                            <ComboBox Grid.Row="2" Grid.Column="1" Padding="5" Margin="4" MaxWidth="450" IsEnabled="False"
+                                      x:Name="regionComboBox" SelectedItem="{Binding Path=Region}" >
+                                
+                            </ComboBox>
+
+                            <Label Grid.Column="0" Grid.Row="3" Margin="4">Poziom dostępu</Label>
+                            <Slider Grid.Row="3" Margin="4" Grid.Column="1" Maximum="5" TickPlacement="BottomRight"  
+                                    IsMoveToPointEnabled="True" TickFrequency="1"  
+                                    IsSnapToTickEnabled="True" x:Name="dostepSlider" 
+                                    IsEnabled="False" Value="{Binding Path=Dostep}" />
+
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
