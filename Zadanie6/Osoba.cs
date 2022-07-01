@@ -24,6 +24,7 @@ namespace Zadanie6
 			set { imie = value; OnPropertyChanged("singleUserInListView"); } 
 		}
 
+		// ealo here zmiany here
 
 		private string nazwisko;
 		public string Nazwisko
